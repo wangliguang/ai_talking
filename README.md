@@ -142,7 +142,8 @@
 
 - [快速开始指南](QUICKSTART.md) - 安装和使用说明
 - [服务选型文档](SERVICE_SELECTION.md) - 软件服务选型分析和价格对比
-- [服务配置指南](SETUP_GUIDE.md) - 详细的服务配置步骤（硅基流动、Whisper、Edge TTS）
+- [服务配置指南](SETUP_GUIDE.md) - 详细的服务配置步骤（硅基流动、讯飞）
+- [GitHub 设置指南](GITHUB_SETUP.md) - Git 和 GitHub 仓库设置说明
 
 ## 🚀 快速开始
 
