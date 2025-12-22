@@ -1,0 +1,24 @@
+# AI Talking 项目依赖
+
+# 大模型相关
+openai>=1.0.0
+
+# 语音识别和合成（讯飞）
+websocket-client>=1.6.0
+requests>=2.31.0
+
+# 音频处理
+pygame>=2.5.0
+numpy>=1.24.0
+
+# 配置文件处理（Python标准库已包含，但列出以便参考）
+# configparser - Python标准库
+
+# 可选：如果需要使用其他大模型API
+# anthropic>=0.7.0  # Claude API
+# qianwen>=0.1.0    # 通义千问（如果有官方SDK）
+
+# 可选：如果需要使用其他语音服务
+# baidu-aip>=4.16.0  # 百度AI SDK
+# aip-speech>=1.0.0  # 百度语音SDK
+
