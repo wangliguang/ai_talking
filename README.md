@@ -12,6 +12,36 @@
 
 ---
 
+## 数据流程图
+
+```mermaid
+sequenceDiagram
+    participant User as 用户
+    participant MIC as INMP441麦克风
+    participant ESP32 as ESP32-S3
+    participant ASR as 讯飞ASR
+    participant LLM as 硅基流动LLM
+    participant TTS as 讯飞TTS
+    participant SPEAKER as MAX98357A扬声器
+    
+    User->>MIC: 说话
+    MIC->>ESP32: I2S音频数据流
+    ESP32->>ESP32: AudioInput读取音频
+    ESP32->>ASR: WebSocket发送音频数据
+    ASR->>ESP32: 返回识别文本
+    ESP32->>LLM: HTTP请求(用户文本+历史)
+    LLM->>ESP32: HTTP响应(AI回复文本)
+    ESP32->>ESP32: 更新对话历史
+    ESP32->>TTS: HTTP请求(文本转语音)
+    TTS->>ESP32: HTTP响应(Base64音频)
+    ESP32->>ESP32: Base64解码音频数据
+    ESP32->>SPEAKER: I2S音频数据流
+    SPEAKER->>User: 播放AI回复
+```
+
+
+---
+
 ## 🎯 项目需求
 
 ### 硬件需求
@@ -41,8 +71,8 @@
 
 ### 软件服务
 - [x] **大模型API**：硅基流动平台（SiliconFlow）- DeepSeek-V3.2 ✅
-- [ ] **语音识别**：科大讯飞"语音听写"服务（WebSocket实时识别）
-- [ ] **语音合成**：科大讯飞在线语音合成服务
+- [x] **语音识别**：科大讯飞"语音听写"服务（WebSocket实时识别）✅ 已配置
+- [x] **语音合成**：科大讯飞在线语音合成服务 ✅ 已配置
 
 ---
 
@@ -214,10 +244,10 @@ DIN               → GPIO9
 #define SILICONFLOW_BASE_URL "https://api.siliconflow.cn/v1"
 #define SILICONFLOW_MODEL "deepseek-ai/DeepSeek-V3.2"
 
-// 讯飞API配置（待配置）
-#define XUNFEI_APP_ID "your_xunfei_app_id"
-#define XUNFEI_API_KEY "your_xunfei_api_key"
-#define XUNFEI_API_SECRET "your_xunfei_api_secret"
+// 讯飞API配置（已配置）
+#define XUNFEI_APP_ID "4ebec607"
+#define XUNFEI_API_KEY "6dd1cf9a8b8923c06fad38041bc89702"
+#define XUNFEI_API_SECRET "MTMyYTc4NjkzNTYzZTY0OTAyNDM1NTgx"
 ```
 
 ### 6. 编译和上传
@@ -276,17 +306,6 @@ DIN               → GPIO9
 
 ## 📁 项目结构
 
-```
-ai_talking/
-├── ai_talking.ino            # 主程序文件（Arduino IDE）
-├── config.h                  # 配置文件
-├── wifi_manager.h            # WiFi管理模块
-├── audio_input.h             # I2S音频输入（麦克风）
-├── audio_output.h            # I2S音频输出（扬声器）
-├── xunfei_asr.h             # 讯飞语音识别模块
-├── xunfei_tts.h             # 讯飞语音合成模块
-└── siliconflow_llm.h        # 硅基流动大模型模块
-```
 
 ---
 
@@ -360,8 +379,8 @@ ai_talking/
 
 ### ⏳ 进行中
 - [x] 硬件采购 ✅ 已完成
+- [x] 讯飞API凭证配置 ✅ 已完成
 - [ ] 硬件连接和测试
-- [ ] 讯飞API凭证配置
 - [ ] 功能测试和调试
 
 ### 📋 待完成
