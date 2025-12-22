@@ -1,13 +1,13 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-env/
-venv/
-ENV/
-.venv
+# Python (已移除，项目现在使用C++)
+# __pycache__/
+# *.py[cod]
+# *$py.class
+# *.so
+# .Python
+# env/
+# venv/
+# ENV/
+# .venv
 
 # IDE
 .vscode/
@@ -40,4 +40,12 @@ models/
 test_audio/
 *.wav
 *.mp3
+
+# ESP32/Arduino
+.pio/
+.vscode/
+*.elf
+*.bin
+*.hex
+*.map
 
