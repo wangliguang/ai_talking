@@ -16,9 +16,9 @@
 #define SILICONFLOW_MODEL "deepseek-ai/DeepSeek-V3.2"
 
 // 讯飞API配置
-#define XUNFEI_APP_ID "your_xunfei_app_id"
-#define XUNFEI_API_KEY "your_xunfei_api_key"
-#define XUNFEI_API_SECRET "your_xunfei_api_secret"
+#define XUNFEI_APP_ID "4ebec607"
+#define XUNFEI_API_KEY "6dd1cf9a8b8923c06fad38041bc89702"
+#define XUNFEI_API_SECRET "MTMyYTc4NjkzNTYzZTY0OTAyNDM1NTgx"
 
 // I2S音频配置（ESP32-S3-DevKitC-1）
 // 麦克风（INMP441）- 使用I2S_NUM_0
