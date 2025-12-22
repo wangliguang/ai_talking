@@ -306,6 +306,27 @@ DIN               → GPIO9
 
 ## 📁 项目结构
 
+### Arduino IDE 项目结构
+
+```
+ai_talking/                    # Arduino IDE项目文件夹（必需）
+├── ai_talking.ino            # 主程序文件（必需，文件名必须与文件夹名相同）
+├── config.h                  # 配置文件（WiFi、API密钥、I2S引脚）
+├── wifi_manager.h            # WiFi管理模块
+├── audio_input.h             # I2S音频输入（INMP441麦克风）
+├── audio_output.h            # I2S音频输出（MAX98357A扬声器）
+├── xunfei_asr.h             # 讯飞语音识别模块（WebSocket）
+├── xunfei_tts.h             # 讯飞语音合成模块（HTTP）
+├── siliconflow_llm.h        # 硅基流动大模型模块（HTTP）
+├── platformio.ini           # PlatformIO配置（可选，如果使用PlatformIO）
+└── README.md                 # 项目文档
+```
+
+**Arduino IDE规范：**
+- ✅ 主文件必须是`.ino`文件，文件名必须与文件夹名相同
+- ✅ 所有`.h`头文件必须与`.ino`文件在同一目录（根目录）
+- ✅ Arduino IDE会自动编译同一目录下的所有文件
+- ✅ 不需要`src/`目录，Arduino IDE不使用
 
 ---
 
