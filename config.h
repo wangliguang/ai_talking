@@ -7,8 +7,8 @@
 #define CONFIG_H
 
 // WiFi配置
-#define WIFI_SSID "your_wifi_ssid"
-#define WIFI_PASSWORD "your_wifi_password"
+#define WIFI_SSID "mamameibabashuai"
+#define WIFI_PASSWORD "wojiaxingxingzuikeai"
 
 // 硅基流动API配置
 #define SILICONFLOW_API_KEY "sk-ztwctasjprgtzqalhskhybmskeidxblxjdegiengzygecvra"
