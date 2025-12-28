@@ -9,10 +9,56 @@
 #include <WiFi.h>
 #include <WebSocketsClient.h>
 #include <ArduinoJson.h>
-#include <base64.h>
-#include <sha256.h>
+#include <mbedtls/sha256.h>
+#include <mbedtls/md.h>
 #include <time.h>
 #include "config.h"
+
+// Base64编码函数（ESP32内置实现）
+String base64Encode(const uint8_t* data, size_t length) {
+  const char base64_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  String encoded = "";
+  int i = 0;
+  int j = 0;
+  uint8_t char_array_3[3];
+  uint8_t char_array_4[4];
+  
+  while (length--) {
+    char_array_3[i++] = *(data++);
+    if (i == 3) {
+      char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
+      char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
+      char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
+      char_array_4[3] = char_array_3[2] & 0x3f;
+      
+      for (i = 0; i < 4; i++) {
+        encoded += base64_chars[char_array_4[i]];
+      }
+      i = 0;
+    }
+  }
+  
+  if (i) {
+    for (j = i; j < 3; j++) {
+      char_array_3[j] = '\0';
+    }
+    
+    char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
+    char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
+    char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
+    char_array_4[3] = char_array_3[2] & 0x3f;
+    
+    for (j = 0; j < i + 1; j++) {
+      encoded += base64_chars[char_array_4[j]];
+    }
+    
+    while (i++ < 3) {
+      encoded += '=';
+    }
+  }
+  
+  return encoded;
+}
 
 class XunfeiASR {
 public:
@@ -141,7 +187,7 @@ String XunfeiASR::recognizeRealtime(int16_t* audioData, int audioLength) {
   }
   
   // 发送音频数据
-  String base64Audio = base64::encode((uint8_t*)audioData, audioLength * sizeof(int16_t));
+  String base64Audio = base64Encode((uint8_t*)audioData, audioLength * sizeof(int16_t));
   
   DynamicJsonDocument frame(2048);
   frame["common"]["app_id"] = appId;

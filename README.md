@@ -343,6 +343,13 @@ ai_talking/                    # Arduino IDE项目文件夹（必需）
 
 ## ⚠️ 常见问题
 
+### Q: 编译错误 "sha256.h: No such file or directory" 或 "base64.h: No such file or directory"
+**A:** 这是库引用错误，已修复 ✅
+- ESP32 Arduino框架不包含独立的`sha256.h`和`base64.h`库
+- 代码已更新为使用ESP32内置的`mbedtls`加密库
+- 如果仍出现此错误，请确保使用最新版本的代码
+- Base64编码/解码功能已实现为内置函数，无需额外库
+
 ### Q: 编译错误 "WiFi.h: No such file or directory"
 **A:** ESP32开发板支持未正确安装，重新安装ESP32开发板支持包
 
